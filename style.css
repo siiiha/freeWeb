@@ -1,0 +1,525 @@
+/* 1. 기본 세팅 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+@font-face {
+    font-family: 'SandollSamlipHobbangOutline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-display: swap;
+}
+
+.special-font {
+    font-family: 'SandollSamlipHobbangOutline', cursive !important;
+}
+
+body {
+    background-color: #fcfaf2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* 2. 메인 대시보드 */
+.container {
+    background: #ffffff;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 16px;
+    width: 620px;
+    height: 400px;
+    display: flex;
+    box-shadow: 6px 6px 0px #1a1a1a;
+    overflow: hidden;
+}
+
+/* 3. 왼쪽 투두 구역 */
+.left {
+    flex: 1.2;
+    border-right: 1.5px dashed #d1c7bd;
+    padding: 20px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+}
+
+.todoList {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d1c7bd;
+    margin: -20px -20px 15px -20px;
+    /* 마진 병합 */
+    padding: 4px 20px;
+    border-bottom: 1.5px solid #1a1a1a;
+}
+
+header h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1a1a1a;
+    letter-spacing: 0.5px;
+}
+
+#all-delect {
+    background-color: #fff0f0;
+    color: #e63946;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 6px;
+    padding: 4px;
+    box-shadow: 2px 2px 0px #1a1a1a;
+}
+
+/* 텅 빈 상태 정렬 최적화 */
+.empty-state {
+    list-style: none;
+    font-size: 60px;
+    color: #999;
+    border: none;
+    background: none;
+    box-shadow: none;
+
+    flex: 1;
+    /* 부모 안에서 남은 공간을 꽉 채워 상하좌우 정중앙 정렬을 만듭니다 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 오밀조밀한 투두 목록 스크롤 창 */
+.normal-list {
+    list-style: none;
+    flex: 1;
+    overflow-y: auto;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.normal-list::-webkit-scrollbar {
+    display: none;
+}
+
+.normal-list {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.normal-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px 14px;
+    background-color: #ffffff;
+    border: 1.5px solid #1a1a1a;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 0px #1a1a1a;
+}
+
+.normal-checkbox {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 4px;
+    margin-right: 12px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.normal-list li span {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.btn-delete {
+    background: none;
+    border: none;
+    color: #999;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.btn-delete:hover {
+    color: #1a1a1a;
+}
+
+/* 📥 하단 서랍 구역 */
+.bottom-drawer {
+    background-color: #f3ede4;
+    border-top: 1.5px solid #1a1a1a;
+    margin: 0 -20px;
+    /* 하단 밀착을 위해 top 마진 제거 및 좌우만 확장 */
+    padding: 15px 20px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.todo-input {
+    display: flex;
+    gap: 8px;
+}
+
+.todo-input input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    background-color: #fff;
+}
+
+.todo-input input::placeholder {
+    color: #a0958a;
+}
+
+#todo-add-btn {
+    background-color: #ffcc66;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 0px #1a1a1a;
+}
+
+.todo-footer {
+    font-size: 13px;
+    font-weight: 700;
+    color: #555;
+    padding-left: 2px;
+}
+
+/* 4. 오른쪽 타이머 & 메모 구역 */
+.right {
+    flex: 0.8;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #fffdf9;
+}
+
+.timer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fef3c7;
+    margin: -20px -15px 15px -15px;
+    padding: 10px 15px;
+    border-bottom: 1.5px solid #1a1a1a;
+    
+}
+
+.timer-header h2 {
+    font-size: 18px;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+#pop-up {
+    background-color: #fff0f0;
+    color: #e63946;
+    font-size: 13px;
+    cursor: pointer;
+    font-weight: 700;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 6px;
+    padding: 4px;
+    box-shadow: 2px 2px 0px #1a1a1a;
+}
+
+.status-marquee-container {
+    width: 250px; /* 기존 상자의 가로 너비 (전광판 크기) */
+    overflow: hidden; /* 영역 밖 글자는 숨김 */
+    background-color: transparent; /* 배경은 투명하게 */
+    
+    /* 💡 기존의 초록색 점선 테두리와 둥근 모서리 스타일을 여기에 적용합니다. */
+    border: 1.5px dashed #2ac1a6; /* 초록색 점선 */
+    border-radius: 8px;
+  
+    
+    display: flex;
+    align-items: center;
+}
+
+.status-marquee-content {
+    display: flex;
+    white-space: nowrap; /* 글자가 줄바꿈되지 않게 함 */
+    animation: marquee 12s linear infinite; /* 10초 동안, 일정한 속도로, 무한 반복 */
+}
+
+.status-marquee-content span {
+   font-size: 13px;
+    font-weight: 600;
+    color: #17b890;
+    margin-right: 60px; /* 💡 팁: 두 텍스트 사이의 간격 */
+}
+
+/* 3. 🔥 핵심: 글자를 이동시키는 애니메이션 정의 (Keyframes) */
+@keyframes marquee {
+    0% {
+        transform: translateX(0); /* 시작 위치: 제자리 */
+    }
+    100% {
+        /* 100% 이동: 실제 텍스트 길이만큼 왼쪽으로 이동시킵니다.
+           (텍스트 길이에 따라 수치를 조절해야 할 수 있습니다.) */
+        transform: translateX(-50%); 
+        /* 💡 팁: 만약 내용을 두 번 반복해서 넣었다면 -50%를 주면 
+           절반을 지나쳤을 때 다시 처음 내용이 나타나 자연스럽게 이어집니다. */
+    }
+}
+
+
+#timer-display {
+    font-size: 42px;
+    font-weight: 800;
+    text-align: center;
+    color: #1a1a1a;
+    margin: 10px 0;
+}
+
+.stopwatch{
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+}
+
+.stopwatch button {
+    flex: 1;
+    font-size: 10px;
+    font-weight: 700;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 8px;
+    padding: 8px 0;
+    box-shadow: 2px 2px 0px #1a1a1a;
+    color: #1a1a1a;
+}
+
+#start-Btn {
+    background-color: #bbf7d0;
+}
+
+#stop-Btn {
+    background-color: #ffedd5;
+}
+
+#reset-Btn {
+    background-color: #fee2e2;
+}
+
+
+/* 작은 알림창 전체 박스 */
+
+.mini-alert-box {
+    position: fixed; 
+    bottom: 20px;
+    right: -400px; /* 👈 안전하게 화면 밖으로 완전히 더 밀어냅니다 (기존 -350px) */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: #ffffff;
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    padding: 12px 16px;
+    box-shadow: 4px 4px 0px #1a1a1a;
+    z-index: 9999; 
+    transition: right 0.4s ease;
+}
+
+/* 활성화되었을 때 화면 안으로 슥 들어오는 클래스 */
+.mini-alert-box.show {
+    right: 20px; /* 👈 화면 오른쪽 벽에서 20px 띄워 안착하므로 아주 깔끔하게 보입니다 */
+}
+
+/* 알림창 글씨 */
+.mini-alert-text {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+/* 작은 엑스(×) 닫기 버튼 */
+.mini-alert-close-btn {
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    color: #a0aec0;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+}
+.mini-alert-close-btn:hover {
+    color: #1a1a1a; /* 마우스 올리면 선명해짐 */
+}
+/* 웹페이지 내에서 보일 때와 미니 창 안에서 보일 때 모두 적용되는 얇은 바 스타일 */
+#timer-widget-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background-color: #ffffff;
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    padding: 8px 16px;
+    box-shadow: 4px 4px 0px #1a1a1a; /* 대시보드 시그니처 그림자 */
+    width: fit-content;
+    margin: 10px auto;
+}
+
+#timer-display {
+    font-size: 50px;
+    font-weight: 700;
+
+    color: #1a1a1a;
+}
+
+#timer-status {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4a5568;
+}
+
+/* 💡 평소 웹페이지 안에서는 이 얇은 바 위젯을 숨깁니다. */
+.hidden-widget {
+    display: none !important;
+}
+
+/* 💡 미니 팝업창(PIP) 내부로 들어갔을 때만 얇은 바 형태로 이쁘게 보이게 만듭니다. */
+body.pip-body #timer-widget-bar {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background-color: #ffffff;
+    border: 2px solid #1a1a1a;
+    border-radius: 10px;
+    padding: 8px 16px;
+    box-shadow: 4px 4px 0px #1a1a1a;
+    width: fit-content;
+    margin: 0;
+}
+
+body.pip-body #pip-display {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1a1a1a;
+}
+
+body.pip-body #timer-status {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4a5568;
+}
+
+/* PIP 창 배경 */
+body.pip-body {
+    background-color: #fcf9f2;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/* 메모 */
+
+
+.memo-container {
+    width: 100%;
+    height: 100%;
+    /* 부모 상자 크기에 맞게 가득 채움 */
+    display: flex;
+}
+
+#memo-input {
+    width: 100%;
+    height: 160px;
+    padding: 12px;
+    background-color: #effaf3;
+    border: 1.5px solid #1a1a1a;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #1a1a1a;
+    resize: none;
+    box-shadow: 4px 4px 0px #1a1a1a;
+    outline: none;
+
+    /* 정석 좌상단 진행 방향 */
+    text-align: left;
+    direction: ltr;
+
+    /* 자동 줄바꿈 */
+    white-space: pre-wrap;
+    word-break: break-all;
+
+    /* 자동 스크롤 생성 */
+    overflow-y: auto;
+
+    
+}
+
+/* 스크롤바 전체 너비(두께) 설정 */
+#memo-input::-webkit-scrollbar {
+    width: 6px;  /* 세로 스크롤바 두께 */
+}
+
+/* 스크롤바가 움직이는 배경(레일) 디자인 */
+#memo-input::-webkit-scrollbar-track {
+background: #f1f1f1; 
+    border-radius: 6px;
+    /* 오른쪽과 위아래에 검은색 하드 테두리를 주어 입체 그림자 효과 구현 */
+    border-right: 2px solid #1a1a1a; 
+    border-top: 1px solid #1a1a1a;
+    border-bottom: 1px solid #1a1a1a;
+
+    
+}
+
+
+
+#memo-input::-webkit-scrollbar-thumb {
+    background: #7bad90; /* 👈 투두리스트 버튼과 맞춘 옐로우 포인트 컬러 */
+    border-radius: 10px; /* 막대기 모서리 둥글게 */
+    border: 1.5px solid #1a1a1a; /* 대시보드 테마와 맞춘 블랙 테두리 선 */
+}
+
+#memo-input:focus {
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    transition: transform 0.05s, box-shadow 0.05s;
+}
+
+/* 닫는 괄호 정상 복구 완료 */
+button:active {
+    transform: translate(2px, 2px);
+    box-shadow: none;
+}

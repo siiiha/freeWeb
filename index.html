@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List App</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Song+Myung&display=swap"
+        rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Sandoll+Samliphopang&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+
+    <script src=".\script.js" defer></script>
+</head>
+
+<body>
+    <main class="container">
+
+        <section class="left">
+
+            <div class="todoList">
+
+                <header>
+                    <h1>TODO LIST</h1>
+                    <button class="btn-clear" id="all-delect">🗑️</button>
+                </header>
+
+                <ul id="todo-list" class="normal-list">
+                    <li>
+                        <div class="normal-checkbox"></div>
+                        <span> </span>
+                        <button class="btn-delete">✖</button>
+                    </li>
+                </ul>
+
+                <div class="bottom-drawer">
+                    <div class="todo-input">
+                        <input type="text" id="todo-input" placeholder="할 일을 적어보세요!">
+                        <button class="btn-normal" id="todo-add-btn">+</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="right">
+
+            <div class="controls" id="stopwatch">
+
+                <header>
+                    <h1>TIMER</h1>
+                    <button class="popup" id="pop-up">📌</button>
+                </header>
+                <div id="timeAneMemo" class="time-and-memo"></div>
+
+                <div class="status-marquee-container">
+                    <div class="status-marquee-content">
+                        <span>열심히 집중중!</span>
+                        <span>열심히 집중중!</span>
+                        <span>열심히 집중중!</span>
+                        <span>열심히 집중중!</span>
+                    </div>
+                </div>
+
+                <div id="timer-display">00:00:00</div>
+
+                <div class="stopwatch">
+                    <button id="start-Btn">START</button>
+                    <button id="stop-Btn">STOP</button>
+                    <button id="reset-Btn">RESET</button>
+                </div>
+            </div>
+
+            <div class="memo-container">
+                <textarea id="memo-input" placeholder="아이디어를 기록해보세요!"></textarea>
+            </div>
+        </section>
+    </main>
+
+
+    <div id="timer-widget-bar" class="hidden-widget">
+        <span id="pip-display">00:00:00</span>
+        <span id="timer-status">집중하는중...!</span>
+    </div>
+
+    <div id="mini-alert" class="mini-alert-box">
+        <span class="mini-alert-text">딴짓감지!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
+        <button id="mini-alert-close" class="mini-alert-close-btn">&times;</button>
+    </div>
+
+
+
+</body>
+</html>
