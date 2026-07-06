@@ -6,27 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List App</title>
 
+
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Song+Myung&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css2?family=Sandoll+Samliphopang&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css">
 
-    <script src=".\script.js" defer></script>
+    <script src="./script.js" defer></script>
 </head>
 
 <body>
     <main class="container">
-
-        <section class="left">
-
+        <!-- 왼쪽 -->
+        <section class="left">  
+            <!-- 1. 투두리스트 -->
             <div class="todoList">
-
                 <header>
                     <h1>TODO LIST</h1>
                     <button class="btn-clear" id="all-delect">🗑️</button>
+                    <!-- 다삭제버튼 -->
                 </header>
 
                 <ul id="todo-list" class="normal-list">
@@ -46,25 +47,27 @@
             </div>
         </section>
 
+        <!-- 오른쪽 -->
         <section class="right">
-
+            <!-- 2. 스탑워치 -->
             <div class="controls" id="stopwatch">
-
                 <header>
                     <h1>TIMER</h1>
                     <button class="popup" id="pop-up">📌</button>
+                    <!-- 창분리버튼 -->
                 </header>
-                <div id="timeAneMemo" class="time-and-memo"></div>
-
+ 
+                <!-- 그냥 위의 장식 -->
                 <div class="status-marquee-container">
                     <div class="status-marquee-content">
-                        <span>열심히 집중중!</span>
-                        <span>열심히 집중중!</span>
-                        <span>열심히 집중중!</span>
-                        <span>열심히 집중중!</span>
+                        <span>대기중</span>
+                        <span>대기중</span>
+                        <span>대기중</span>
+                        <span>대기중</span>
                     </div>
                 </div>
 
+                <!-- 타이머~ -->
                 <div id="timer-display">00:00:00</div>
 
                 <div class="stopwatch">
@@ -74,24 +77,27 @@
                 </div>
             </div>
 
-            <div class="memo-container">
-                <textarea id="memo-input" placeholder="아이디어를 기록해보세요!"></textarea>
+
+            <!-- 3. 메모 -->
+            <div class="memo">
+                <textarea maxlength="118" id="memo-input" placeholder="아이디어를 기록해보세요!" style="resize:none; overflow:hidden;"></textarea>
             </div>
+
         </section>
+
     </main>
 
-
+    <!-- 위젯?? 창분리 -->
     <div id="timer-widget-bar" class="hidden-widget">
         <span id="pip-display">00:00:00</span>
-        <span id="timer-status">집중하는중...!</span>
+        <span id="timer-status">시간이 흐른다...</span>
     </div>
 
+    <!-- 딴짓하면 뜨는 알람이다. -->
     <div id="mini-alert" class="mini-alert-box">
         <span class="mini-alert-text">딴짓감지!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</span>
         <button id="mini-alert-close" class="mini-alert-close-btn">&times;</button>
     </div>
-
-
 
 </body>
 </html>
