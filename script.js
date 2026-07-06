@@ -441,14 +441,42 @@ async function togglePipWidget() {
 function toMemo() {
     const memoInput = document.getElementById('memo-input');
 
+    const MAX_BYTES = 238; //바이트 제한
+
     //저장된 메모 불러오기
     const savedMemo = localStorage.getItem('autosave-memo');
     if (savedMemo !== null) {
         memoInput.value = savedMemo;
     }
+    
     //오토세이브
     memoInput.addEventListener('input', () => {
+        //한,영 바이트 계산
+        let currentBytes = 0;
+        let filteredText = "";
+
+        for (let i = 0; i < memoInput.value.length; i++) {
+            const char = memoInput.value[i];
+            
+            // 한글(유니코드)은 2바이트, 영어/숫자/공백은 1바이트로 계산
+            if (escape(char).length > 4) {
+                currentBytes += 2;
+            } else {
+                currentBytes += 1;
+            }
+
+            // 설정한 최대 바이트(238)를 넘지 않을 때까지만 문자열에 누적
+            if (currentBytes <= MAX_BYTES) {
+                filteredText += char;
+            } else {
+                break; // 허용 용량 초과 시 반복문 즉시 종료 (글자 차단)
+            }
+        }
+
+        // 입력창의 값을 계산된 제한 글자까지만 남기도록 강제 갱신
+        memoInput.value = filteredText;
+
+
         localStorage.setItem('autosave-memo', memoInput.value);
     });
 }
-

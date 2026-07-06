@@ -53,6 +53,7 @@ body {
 .todoList {
     display: flex;
     flex-direction: column;
+  
     height: 100%;
 }
 
@@ -151,6 +152,33 @@ header h1 {
     margin-right: 12px;
     background-color: white;
     cursor: pointer;
+    position: relative;
+}
+
+.normal-checkbox.checked {
+  background-color: #ffcc66; 
+}
+
+.normal-checkbox.checked::after {
+  content: '✔';
+  color: #1a1a1a;
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  line-height: 18px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 💡 요소의 중심을 완벽한 중앙으로 이동 */
+  
+  display: block;
+}
+
+li.completed span {
+  text-decoration: line-through;
+  color: #A0A5B0;
 }
 
 .normal-list li span {
