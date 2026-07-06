@@ -328,48 +328,31 @@ function resetInactivityTimer() {
         clearTimeout(inactivityTimeout);
     }
 
-
-    
-    if (timerInterval) {
-        inactivityTimeout = setTimeout(() => {
-            stopBtn.click(); // 타이머 정지
-            miniAlert.classList.add("show"); // 딴짓 알림 표시
-        }, INACTIVE_LIMIT);
-    }
-}
-
-// 딴짓 감지 타이머 리셋 및 집중 상태 UI 복원
-function resetInactivityTimer() {
-    if (inactivityTimeout) {
-        clearTimeout(inactivityTimeout);
-    }
-
     if (timerInterval) {
         const marqueeContent = document.querySelector('.status-marquee-content');
+        
+        
         if (marqueeContent) {
-            marqueeContent.classList.remove('marquee-alert'); // 딴짓 스타일 제거
-            
-
+            marqueeContent.classList.remove('marquee-alert'); 
             const spans = marqueeContent.querySelectorAll('span');
-            spans.forEach(span => {
-                span.textContent = '열심히 집중중!';
-            });
+            spans.forEach(span => { span.textContent = '열심히 집중중!'; });
         }
 
+        // 지정된 시간 동안 멈춰있을 때 실행할 타임아웃 설정
         inactivityTimeout = setTimeout(() => {
             stopBtn.click(); // 타이머 정지
 
+            // 딴짓 상태 UI 전광판 적용
             if (marqueeContent) {
-                marqueeContent.classList.add('marquee-alert'); // 딴짓 스타일 적용 
-
-
+                marqueeContent.classList.add('marquee-alert'); 
                 const spans = marqueeContent.querySelectorAll('span');
-                spans.forEach(span => {
-                    span.textContent = '딴짓 감지!';
-                });
+                spans.forEach(span => { span.textContent = '딴짓 감지!'; });
             }
 
-            miniAlert.classList.add("show"); // 딴짓 알림 표시
+            //미니알림보여주기
+            if (miniAlert) {
+                miniAlert.classList.add("show"); 
+            }
         }, INACTIVE_LIMIT);
     }
 }
